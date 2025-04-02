@@ -4,12 +4,12 @@ import React, { useEffect, useState } from "react";
 
 //create your first component
 const Home = () => {
-	let [count, setCount] = useState(0)
+	let [count, setCount] = useState(9990)
 	let [formatted, setFormatted] = useState(['0','0','0','0'])
 
 	useEffect(()=>{
 		const interval = setInterval(()=> {
-			setCount((prev)=>prev < 10000 ? prev + 1 : 0)
+			setCount((prev)=>prev < 9999 ? prev + 1 : 0)
 		}, 1000)
 
 		return () => clearInterval(interval);
