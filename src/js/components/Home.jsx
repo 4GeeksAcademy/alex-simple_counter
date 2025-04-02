@@ -1,28 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
 
 //create your first component
 const Home = () => {
-	return (
-		<div className="text-center">
-            
+	let [count, setCount] = useState(0)
+	let [formatted, setFormatted] = useState(['0','0','0','0'])
 
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+	useEffect(()=>{
+		const interval = setInterval(()=> {
+			setCount((prev)=>prev < 10000 ? prev + 1 : 0)
+		}, 1000)
+
+		return () => clearInterval(interval);
+	}, [])
+
+	useEffect(()=> {
+		setFormatted(String(count).padStart(4,'0').split(''))
+
+	},[count])
+	return (
+		<div className="container-fluid d-flex justify-content-center">
+			<p className="p-4" style={{background:'black', color:"white"}}>⏱️</p>			
+            <p className="p-4" style={{background:'black', color:"white"}}>{formatted[0]}</p>
+			<p className="p-4" style={{background:'black', color:"white"}}>{formatted[1]}</p>
+			<p className="p-4" style={{background:'black', color:"white"}}>{formatted[2]}</p>
+			<p className="p-4" style={{background:'black', color:"white"}}>{formatted[3]}</p>
 		</div>
 	);
+	
 };
 
 export default Home;
